@@ -84,7 +84,7 @@ export const resetPasswordLink = async (user : any, res: Response) => {
     const { _id, email } = user;
 
     const token = _id + uuidv4();
-    const link = `${APP_URL}api/v1/users/reset-password/${_id}/${token}`;
+    const link = `${CLIENT_URL}reset/${_id}/${token}`
 
     const mailObject = {
         from: AUTH_EMAIL,

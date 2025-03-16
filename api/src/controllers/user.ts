@@ -115,7 +115,6 @@ export const resetPassword = async (req: Request, res: Response) => {
             res.json({
                 status: "error",
                 message: message,
-                redirectUrl: `/users/reset-status?status=error&message=${message}`,
             });
             return;
         }
@@ -127,7 +126,6 @@ export const resetPassword = async (req: Request, res: Response) => {
             res.json({
                 status: "error",
                 message: message,
-                redirectUrl: `/users/reset-status?status=error&message=${message}`,
             });
             return;
         }
@@ -139,7 +137,6 @@ export const resetPassword = async (req: Request, res: Response) => {
             res.json({
                 status: "error",
                 message: message,
-                redirectUrl: `/users/reset-status?status=error&message=${message}`,
             });
             return;
         } else {
@@ -150,7 +147,6 @@ export const resetPassword = async (req: Request, res: Response) => {
                 res.json({
                     status: "error",
                     message: message,
-                    redirectUrl: `/users/reset-status?status=error&message=${message}`,
                 });
                 return;
             } else {
@@ -164,8 +160,7 @@ export const resetPassword = async (req: Request, res: Response) => {
         console.log(err)
         res.json({
             status: "error",
-            message: "Somethig went wrong",
-            redirectUrl: `/users/reset-status?status=error&message=`,
+            message: "Somethig went wrong"
         });
     }
 };

@@ -11,6 +11,7 @@ import { themeAtom } from './store/atoms/themeAtom';
 import { EmailVerification } from './pages/EmailVerify';
 import { ChangePassword } from './pages/ChangePassword';
 import ResetPasswordSuccess from './pages/ResetPasswordSuccess';
+import { PassWordResetStatus } from './pages/PasswordResetStatus';
 
 
 
@@ -45,6 +46,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/reset-password' element={<ResetPassword />} />
+          <Route path='/reset/:userId/:token' element={<PassWordResetStatus />} />
           <Route path='/users/:userId/:token' element={<EmailVerification />} />
           <Route path='/users/change-password' element={<ChangePassword />} />
           <Route path='/users/reset-status' element={<ResetPasswordSuccess />} />
