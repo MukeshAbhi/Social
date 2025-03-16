@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { userAtom } from "../store/atoms/userAtom";
 import { User } from "../types"
 import { Link } from "react-router-dom";
@@ -101,15 +101,15 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
                 </p>
                 <div className="flex gap-2 items-center text-ascent-2">
                     <Instagram className="text-xl text-ascent-1"/>
-                    <span className="text-lg text-ascent-2">Instagram</span>
+                    <span className="text-lg text-ascent-2"><Link to={"https://www.instagram.com/accounts/login/?next=%2F&source=mobile_nav"}>Instagram</Link></span>
                 </div>
                 <div className="flex gap-2 items-center text-ascent-2">
                     <Facebook className="text-xl text-ascent-1"/>
-                    <span className="text-lg text-ascent-2">FaceBook</span>
+                    <span className="text-lg text-ascent-2"><Link to={"https://www.facebook.com/"}>FaceBook</Link></span>
                 </div>
                 <div className="flex gap-2 items-center text-ascent-2">
                     <Twitter className="text-xl text-ascent-1"/>
-                    <span className="text-lg text-ascent-2">Twitter / X</span>
+                    <span className="text-lg text-ascent-2"><Link to={"https://x.com/i/flow/login"}>Twitter</Link></span>
                 </div>
             </div>
 

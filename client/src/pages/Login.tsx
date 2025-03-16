@@ -1,4 +1,4 @@
-import { data, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { TextInput } from "../components/TextInput";
 import { useForm } from "react-hook-form"; 
 import { useState } from "react";
@@ -18,7 +18,7 @@ export const Login = () => {
                                                 status: ""
                                             });
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-    const { user, login, logout } = useAuth();
+    const { login } = useAuth();
     
 
     const onSubmit = async ( data: any ) => {

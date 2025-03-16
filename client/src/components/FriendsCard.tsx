@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Friend, User } from "../types"
+import { Friend } from "../types"
 import { NoProfile } from "../assets";
 
 interface FriendsProps {

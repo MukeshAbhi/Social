@@ -1,4 +1,4 @@
-import { useRecoilState } from "recoil"
+import { useRecoilValue } from "recoil"
 import { userAtom } from "../store/atoms/userAtom"
 import { useState } from "react";
 import { ErrMsg } from "../types";
@@ -11,7 +11,7 @@ import { TextInput } from "./TextInput";
 import { useAuth } from "../customHooks/useAuth";
 
 export const EditProfile = () => {
-    const [profile, setProfile] = useRecoilState(userAtom);
+    const profile = useRecoilValue(userAtom);
     const [errMsg, setErrMsg] = useState<ErrMsg>({
         message: "",
         status: ""

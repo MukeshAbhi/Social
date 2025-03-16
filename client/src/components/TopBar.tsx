@@ -1,6 +1,5 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+import { useRecoilValue, useSetRecoilState } from "recoil"
 import { themeAtom } from "../store/atoms/themeAtom"
-import { userAtom } from "../store/atoms/userAtom";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TextInput } from "./TextInput";
@@ -15,11 +14,11 @@ import { postAtom } from "../store/atoms/postAtom";
 export const TopBar = () => {
     const theme = useRecoilValue(themeAtom);
     const setTheme = useSetRecoilState(themeSelector);
-    const { user, login, logout } = useAuth();
-    const [object, setObject] = useRecoilState(userAtom);
+    const { user,  logout } = useAuth();
+    
     const setPosts = useSetRecoilState(postAtom);
 
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const {register, handleSubmit} = useForm();
 
     const handleSearch = async ( data: any) => {
         await fetchPosts({

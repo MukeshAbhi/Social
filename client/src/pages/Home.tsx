@@ -131,7 +131,7 @@ export const Home = () => {
     const handleFriendRequest = async (id: string) => {
         try{
             
-            const res = await sendFrienRequest( user?.token as string, id );
+            await sendFrienRequest( user?.token as string, id );
             await fetchSuggestedFriends();
         } catch(error) {
             console.log(error)
@@ -141,7 +141,7 @@ export const Home = () => {
     const acceptFriendRequest = async (id: string, status: string) => {
         try {
     
-            const res = await apiRequest({
+            await apiRequest({
                 url: "users/accept-request",
                 token: user?.token as string,
                 method: "POST",

@@ -27,7 +27,7 @@ export const ChangePassword = () => {
        
             try {
                 console.log("here")
-                const ressponse = await axios.post(`${API_URL}users/reset-password`,
+                const ressponse = await axios.post(`${API_URL}/users/reset-password`,
                     {
                         userId,
                         password: passwordValue

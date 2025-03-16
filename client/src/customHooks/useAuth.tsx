@@ -1,6 +1,5 @@
 import { useRecoilState } from "recoil"
-import { userAtom, UserAtomType } from "../store/atoms/userAtom"
-import { User } from "../types";
+import { userAtom } from "../store/atoms/userAtom"
 
 
 
