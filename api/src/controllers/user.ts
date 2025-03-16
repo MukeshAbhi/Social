@@ -20,9 +20,8 @@ export const verifyEmail = async (req: Request, res: Response) => {
             const message = "Invalid verification link. Try again later."
             res.json({
                 status: "error",
-                message: message,
-                redirectUrl: `/users/verified?status=error&message=${message}`,
-            });
+                message: message
+            })
             return; 
         }
 
@@ -35,7 +34,6 @@ export const verifyEmail = async (req: Request, res: Response) => {
             res.json({
                 status: "error",
                 message: message,
-                redirectUrl: `/users/verified?status=error&message=${message}`,
             });
             return;
         }
@@ -47,7 +45,6 @@ export const verifyEmail = async (req: Request, res: Response) => {
             res.json({
                 status: "error",
                 message: message,
-                redirectUrl: `/users/verified?status=error&message=${message}`,
             });
             return;
         }
@@ -58,7 +55,6 @@ export const verifyEmail = async (req: Request, res: Response) => {
         res.json({
             status: "success",
             message: message,
-            redirectUrl: `/users/verified?status=success&message=${message}`,
         });
         
     } catch (err) {
@@ -66,7 +62,6 @@ export const verifyEmail = async (req: Request, res: Response) => {
         res.json({
             status: "error",
             message: "Something went wrong ",
-            redirectUrl: `/users/verified?status=error&message=`,
         });
     }
 };

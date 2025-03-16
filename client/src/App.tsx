@@ -8,7 +8,7 @@ import { ResetPassword } from './pages/ResetPassword';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from './store/atoms/userAtom';
 import { themeAtom } from './store/atoms/themeAtom';
-import EmailVerification from './pages/EmailVerify';
+import { EmailVerification } from './pages/EmailVerify';
 import { ChangePassword } from './pages/ChangePassword';
 import ResetPasswordSuccess from './pages/ResetPasswordSuccess';
 
