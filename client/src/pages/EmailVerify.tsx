@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 const VerifyEmail = () => {
@@ -16,7 +16,7 @@ const VerifyEmail = () => {
         setMessage(response.data.message);
         if (response.data.status === "success") {
           setStatus("success");
-          setTimeout(() => navigate("/login"), 3000); // Redirect to login after 3s
+          setTimeout(() => navigate("/login"), 10000); // Redirect to login after 3s
         } else {
           setStatus("error");
         }
@@ -34,8 +34,9 @@ const VerifyEmail = () => {
         {status === "loading" && <h2 className="text-lg font-semibold">Verifying...</h2>}
         {status === "success" && (
           <>
-            <h2 className="text-green-600 font-bold text-xl">✅ Email Verified!</h2>
+            <h2 className="text-[#008000] font-bold text-xl">✅ Email Verified!</h2>
             <p>{message}</p>
+            <Link to={"/login"} className="mt-5 text-2xl">Login</Link>
           </>
         )}
         {status === "error" && (

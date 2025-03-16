@@ -160,6 +160,7 @@ export const resetPassword = async (req: Request, res: Response) => {
                 return;
             } else {
                 res.json({
+                    status: "success",
                     redirectUrl: `/users/change-password?&id=${userId}`,
                 });
             }
