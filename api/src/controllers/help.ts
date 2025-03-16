@@ -5,8 +5,9 @@ import { v4 as uuidv4 } from "uuid";
 import { hash } from "bcrypt";
 import Verification from "../db/models/emailVerificationModel";
 import PasswordReset from "../db/models/PasswordReset";
+import { idText } from "typescript";
 
-const { AUTH_EMAIL, AUTH_PASSWORD, APP_URL } = process.env;
+const { AUTH_EMAIL, AUTH_PASSWORD, APP_URL, CLIENT_URL } = process.env;
 
 let transporter = createTransport({
     host: "smtp.gmail.com",
@@ -22,7 +23,7 @@ export const sendVerificationEmail = async (user : any, res: Response) => {
 
     const token = uuidv4();
 
-    const link = `${APP_URL}api/v1/users/verify/${_id}/${token}`;
+    const link = `${CLIENT_URL}users/${_id}/${token}`;
 
     const mailObject = {
         to: email,

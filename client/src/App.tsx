@@ -45,7 +45,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/reset-password' element={<ResetPassword />} />
-          <Route  path='/users/verified' element={<EmailVerification />} />
+          <Route path='/users/:userId/:token' element={<EmailVerification />} />
           <Route path='/users/change-password' element={<ChangePassword />} />
           <Route path='/users/reset-status' element={<ResetPasswordSuccess />} />
         </Routes>
