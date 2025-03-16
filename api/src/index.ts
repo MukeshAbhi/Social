@@ -12,12 +12,7 @@ const port = process.env.PORT || 3000;
 
 dbConnection();
 
-app.use(cors({
-    origin: "http://localhost:5173",  // Allow requests from your frontend
-    credentials: true,  // Allow cookies if needed
-    methods: ["GET", "POST", "PUT", "DELETE"],  // Allowed request types
-    allowedHeaders: ["Content-Type", "Authorization"],  // Explicitly allow headers
-}));
+app.use(cors());
 
 app.use(express.json({ limit: "10mb"}));
 app.use(express.urlencoded({ extended: true }))
