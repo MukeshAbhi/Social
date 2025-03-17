@@ -1,10 +1,12 @@
 import { useRecoilState } from "recoil";
 import { userAtom } from "../store/atoms/userAtom";
-import { User } from "../types"
+import { Friend, User } from "../types"
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
-import { UserPen, UserPlus, MapPinHouse, BriefcaseBusiness, Instagram, Facebook, Twitter  } from 'lucide-react';
+import { UserPen, UserPlus, MapPinHouse, BriefcaseBusiness, Instagram, Facebook, Twitter, UserRoundPlus, Check  } from 'lucide-react';
 import moment from "moment";
+import { useState } from "react";
+import { sendFrienRequest } from "../utils";
 
 
 
@@ -15,13 +17,22 @@ type ProfileCardProps = {
 export const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
 
     const [object, setObject] = useRecoilState(userAtom);
-    const proflileOwner = object.user;
-    
+    const profileOwner = object.user;
+    const [ sentRequest, setSentRequest ] = useState<{ [key: string]: boolean }>({})
     const clickHandler = () => {
         setObject((currentValue) => ({
             ...currentValue, edit: true
         }))
     };
+    const handleFriendRequest = async (id: string) => {
+            try{
+                
+                await sendFrienRequest( profileOwner?.token as string, id );
+                setSentRequest((prev) => ({ ...prev, [id]: true }));
+            } catch(error) {
+                console.log(error)
+            }
+        };
 
     return(
         <div className="w-full bg-primary flex flex-col items-center shadow-sm rounded-xl px-6 py-4">
@@ -42,13 +53,18 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ user }) => {
                     </div>
                 </Link>
                 
-                <div>
-                    {user?._id === proflileOwner?._id ? (
-                        <UserPen className="text-blue cursor-pointer" onClick={clickHandler } />
-                    ): ( <button className="bg-[#0444a430] text-sm text-white p-1 rounded" 
-                            onClick={() => {}} >
-                        <UserPlus className="text-blue" />
-                    </button> )}
+                <div >
+                    {user?._id === profileOwner?._id ? (
+                        <UserPen className="text-blue cursor-pointer" onClick={clickHandler} />
+                    ) : !profileOwner?.friends?.some((friend :  Friend ) => friend?._id === user?._id) ? (
+                        <button
+                            className="bg-[#0444a430] text-sm text-white p-1 rounded"
+                            onClick={() => handleFriendRequest(user?._id as string)}
+                            disabled={sentRequest[user?._id as string]}
+                        >
+                            {sentRequest[user?._id as string] ? <Check size={20} className="text-[#0f52b6]" /> : <UserRoundPlus size={20} className="text-[#0f52b6]" />}
+                        </button>
+                    ) : null}
                 </div>
             </div>
 
