@@ -3,7 +3,7 @@ import { userAtom } from "../store/atoms/userAtom";
 import { Friend, User } from "../types"
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
-import { UserPen, UserPlus, MapPinHouse, BriefcaseBusiness, Instagram, Facebook, Twitter, UserRoundPlus, Check  } from 'lucide-react';
+import { UserPen, MapPinHouse, BriefcaseBusiness, Instagram, Facebook, Twitter, UserRoundPlus, Check  } from 'lucide-react';
 import moment from "moment";
 import { useState } from "react";
 import { sendFrienRequest } from "../utils";

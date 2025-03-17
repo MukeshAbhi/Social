@@ -8,7 +8,7 @@ import { FriendsCard } from "../components/FriendsCard";
 import { Post, User } from "../types";
 import { PostCard } from "../components/PostCard";
 import { Loading } from "../components/Loading";
-import { deletePost, fetchPosts, getUserInfo, likePost } from "../utils";
+import { deletePost, fetchPosts, getUserInfo, likePost, viewUserProfile } from "../utils";
 
 
 export const Profile = () => {
@@ -43,6 +43,10 @@ export const Profile = () => {
             uri: uri
         } )
         setLoading(false);
+    };
+
+    const viewCounthandler = async (id: string) => {
+            await viewUserProfile(user?.token as string, id)
     }
     useEffect(() => {
         setLoading(true);
@@ -75,6 +79,7 @@ export const Profile = () => {
                                     user={user}
                                     deletePost={handleDelete}
                                     likePost={handleLikePost}
+                                    viewCount={() => viewCounthandler}
                                 />
                             ))
                         ) : (
