@@ -3,7 +3,7 @@ module.exports = {
   content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
   theme: {
     backgroundImage:{
-      bgNew: 'url(./new.jpg)'
+      bgNew: 'url(/new.jpg)'
     },
     colors: {
       bgColor: "rgb(var(--color-bg) / <alpha-value>)",
