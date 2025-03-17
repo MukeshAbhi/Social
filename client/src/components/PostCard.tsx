@@ -15,6 +15,7 @@ interface PostCardProps {
     user?: User | null;
     deletePost : (id: string) => void;
     likePost : (uri : string) => void;
+    viewCount: (id: string) => void
 }
 
 interface CommentFormProps {
@@ -176,7 +177,7 @@ const CommentForm :FC<CommentFormProps>= ({user, id, replyAt, getComments}) => {
     )
 }
 
-export const PostCard : FC<PostCardProps> = ({ post, user, deletePost, likePost }) => {
+export const PostCard : FC<PostCardProps> = ({ post, user, deletePost, likePost, viewCount }) => {
 
     const [showAll, setShowAll] = useState("");
     const [showReply, setShowReply] = useState("");
@@ -213,8 +214,11 @@ export const PostCard : FC<PostCardProps> = ({ post, user, deletePost, likePost 
 
     const handleDelete = async (id : string) => {
         deletePost(id)
-        
     } 
+
+    const viewHandler = async (id: string) => {
+        viewCount(id)
+    }
     return(
         <div className="mb-2 bg-primary p-4 rounded-xl">
             <div className="flex gap-3 items-center mb-2">
@@ -223,12 +227,13 @@ export const PostCard : FC<PostCardProps> = ({ post, user, deletePost, likePost 
                         src={post.userId.profileUrl ?? NoProfile}
                         alt={post.userId.firstName}
                         className="w-12 h-12 md:w-14 md:h-14 object-cover rounded-full"
+                        onClick={()=>viewHandler(post.userId._id)}
                     />
                 </Link>
                 <div className="w-full flex justify-between">
                     <div>
                         <Link to={`/profile/${post.userId._id}`}>
-                            <p className="font-medium text-lg text-ascent-1">
+                            <p className="font-medium text-lg text-ascent-1"  onClick={()=>viewHandler(post.userId._id)}>
                                 {post.userId.firstName} {post.userId.lastName}
                             </p>
                         </Link>

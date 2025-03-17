@@ -7,14 +7,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
 import { CustomButton } from "../components/CustomButton";
-import { FileVideo, ImagePlay, ImagePlus, UserRoundPlus } from "lucide-react";
+import { Check, FileVideo, ImagePlay, ImagePlus, UserRoundPlus } from "lucide-react";
 import { TextInput } from "../components/TextInput";
 import { useForm } from "react-hook-form";
 import { ErrMsg, User } from "../types";
 import { Loading } from "../components/Loading";
 import { PostCard } from "../components/PostCard";
 import { EditProfile } from "../components/EditProfile";
-import { apiRequest, deletePost, fetchPosts, getUserInfo, handleFileUpload, likePost, sendFrienRequest } from "../utils";
+import { apiRequest, deletePost, fetchPosts, getUserInfo, handleFileUpload, likePost, sendFrienRequest, viewUserProfile } from "../utils";
 import { postAtom } from "../store/atoms/postAtom";
 import { useAuth } from "../customHooks/useAuth";
 
@@ -44,6 +44,7 @@ export const Home = () => {
     const [ posting, setPosting ] = useState<boolean>(false);
     const [ loading, setLoading ] = useState<boolean>(false);
     const [ posts, setPosts ] = useRecoilState(postAtom);
+    const [ sentRequest, setSentRequest ] = useState<{ [key: string]: boolean }>({})
     const { login } = useAuth();
 
 
@@ -133,6 +134,7 @@ export const Home = () => {
             
             await sendFrienRequest( user?.token as string, id );
             await fetchSuggestedFriends();
+            setSentRequest((prev) => ({ ...prev, [id]: true }));
         } catch(error) {
             console.log(error)
         }
@@ -160,11 +162,13 @@ export const Home = () => {
     const getUser = async () => {
         
         const res = await getUserInfo(user?.token as string);
-        console.log("res ", res)
         const newData = { token: user?.token, ...res };
-        console.log("newData, " , newData);
         login(newData);
     };
+
+    const viewCounthandler = async (id: string) => {
+        await viewUserProfile(user?.token as string, id)
+    }
 
     useEffect( () => {
 
@@ -306,6 +310,7 @@ export const Home = () => {
                                       user={user}
                                       deletePost={handleDelete}
                                       likePost={handlePostLike}
+                                      viewCount={viewCounthandler}
                             />
                         ))
                     ) : (
@@ -399,9 +404,12 @@ export const Home = () => {
                                                 </span>
                                             </div>
                                         </Link>
-                                        <button className="bg-[#0444a430] text-sm text-white p-1 rounded " onClick={() => handleFriendRequest(friend._id)}>
-                                            <UserRoundPlus size={20} className="text-[#0f52b6]" />
-
+                                        <button 
+                                            className="bg-[#0444a430] text-sm text-white p-1 rounded " 
+                                            onClick={() => handleFriendRequest(friend._id)}
+                                            disabled={sentRequest[friend._id]}
+                                            >
+                                            {sentRequest[friend._id] ? <Check size={20} className="text-[#0f52b6]" /> : <UserRoundPlus size={20} className="text-[#0f52b6]" />}
                                         </button>
                                     </div>
                                 ) )

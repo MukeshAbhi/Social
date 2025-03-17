@@ -87,6 +87,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
     if (!parsedData.success) {
         const error = new CustomError("Invalid Inputs");
         error.statusCode = 400;
+        console.log("here 1")
         next(error)
         return;
     }
@@ -96,19 +97,21 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
         if (userExist) {
             const error = new CustomError("Email Address already exists");
             error.statusCode = 400;
+            console.log("here 2")
+            console.log(error);
             next(error)
             return;
         } 
 
         const hashedPassword = await hash( parsedData.data.password, 10);
-
+        console.log("here 3")
         const user = await Users.create({
             firstName,
             lastName,
             email,
             password: hashedPassword
         })
-
+        console.log("here 4")
         if (!user) {
             const error = new CustomError("Failed to create User / DB issue");
             error.statusCode = 500;
@@ -116,7 +119,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
             next(error);
             return;
         }
-
+        console.log("here 5")
         sendVerificationEmail(user, res);
 
     } catch (error) {

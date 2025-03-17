@@ -21,6 +21,7 @@ interface FetchPosts {
 export const API = axios.create({
     baseURL: API_URL,
     responseType: "json",
+    validateStatus: (status) => status < 500,
 });
 
 
@@ -144,7 +145,7 @@ export const sendFrienRequest = async (token:string, id:string) => {
     }
 };
 
-export const viewUserProfileHas =  async (token:string, id:string) => {
+export const viewUserProfile =  async (token:string, id:string) => {
     try {
         const res = await apiRequest({
             url: "/users/profile-view",

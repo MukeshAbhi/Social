@@ -9,7 +9,7 @@ const errorMiddleware = (
 ) => {
   let statusCode = err.statusCode || 500;
   let message = err.message || "Something went wrong!";
-  let success = "failed";
+  let status = "failed";
 
   // Handle Mongoose Validation Error
   if (err.name === "ValidationError" && err.errors) {
@@ -18,15 +18,17 @@ const errorMiddleware = (
       .map((el) => el.message)
       .join(", ");
   }
-
+  console.log("here here 1");
+  
   // Handle Duplicate Key Error (MongoDB)
   if (err.code === 11000 && err.keyValue) {
     statusCode = 400;
     message = `${Object.values(err.keyValue).join(", ")} field must be unique!`;
-  }
-
+  };
+  console.log("error ", err.message);
+  console.log("here here 2");
   res.status(statusCode).json({
-    success,
+    status,
     message,
   });
 };

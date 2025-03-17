@@ -42,12 +42,15 @@ export const Register = () => {
                 setErrMsg({message:"Something went wrong. Please try again.",
                     status:"failed"
                 });
+                setIsSubmitting(false);
                 return;
             }
             
             
             if ( res.status === "failed") {
                 setErrMsg(res);
+                setIsSubmitting(false);
+                
             } else {
                 setErrMsg(res);
                 setTimeout(() => {

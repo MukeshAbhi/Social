@@ -425,6 +425,12 @@ export const profileViews = async (req: Request, res: Response, next: NextFuncti
         res.status(404).json({ success: false, message: "User not found" });
         return;
     }
+
+    const exists = user.views.some((ids) => ids === userId);
+
+    if (exists) {
+        return;
+    } 
     
     user.views.push(userId);
     await user?.save();
