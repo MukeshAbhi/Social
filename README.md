@@ -26,8 +26,8 @@ Ensure you have the following installed:
 ### Backend Setup
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/connect.git
-   cd connect/backend
+   git clone https://github.com/MukeshAbhi/Social
+   cd Social/api
    ```
 2. Install dependencies:
    ```sh
